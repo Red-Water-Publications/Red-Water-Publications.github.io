@@ -59,6 +59,30 @@
                     });
             });
         </script>
+        <h2>Quick Poll</h2>
+        <p>Do you like this blog?</p>
+        <button onclick="voteYes()">Yes</button>
+        <button onclick="voteNo()">No</button>
+        <div id="pollResult"></div>
+
+        <script>
+            let yesVotes = 0;
+            let noVotes = 0;
+
+            function voteYes() {
+                yesVotes++;
+                updatePoll();
+            }
+
+            function voteNo() {
+                noVotes++;
+                updatePoll();
+            }
+
+            function updatePoll() {
+                document.getElementById('pollResult').innerText = `Yes: ${yesVotes}, No: ${noVotes}`;
+            }
+        </script>
 
     </main>
     <footer>

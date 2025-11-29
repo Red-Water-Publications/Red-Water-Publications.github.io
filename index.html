@@ -1,1 +1,250 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>root@cyb3r:~#</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap');
+
+    :root {
+      --neon-pink: #ff00ff;
+      --neon-cyan: #00ffff;
+      --neon-purple: #9d00ff;
+      --bg-dark: #0d0d1f;
+      --darker: #050514;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--neon-cyan);
+      font-family: 'Roboto Mono', monospace;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Animated scanlines */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.1),
+        rgba(0,0,0,0.1) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      animation: scanlines 8s linear infinite;
+      z-index: 10;
+    }
+
+    @keyframes scanlines {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(10px); }
+    }
+
+    /* Glitch background effect */
+    .glitch-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent 50%, rgba(255,0,255,0.03) 50%);
+      background-size: 4px;
+      animation: glitch 10s steps(50) infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes glitch {
+      0%, 100% { transform: translateX(0); }
+      10% { transform: translateX(-2px); }
+      20% { transform: translateX(2px); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .terminal {
+      background: rgba(5, 5, 20, 0.85);
+      border: 2px solid var(--neon-purple);
+      border-radius: 8px;
+      padding: 3rem 4rem;
+      max-width: 900px;
+      box-shadow: 
+        0 0 30px rgba(157, 0, 255, 0.6),
+        inset 0 0 20px rgba(0, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px var(--neon-cyan);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .glitch {
+      position: relative;
+    }
+
+    .glitch::before, .glitch::after {
+      content: 'root@cyb3r';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      background: var(--bg-dark);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glitch::before {
+      animation: glitch-1 2s infinite linear alternate-reverse;
+      left: 2px;
+      text-shadow: -2px 0 #ff00ff;
+    }
+
+    .glitch::after {
+      animation: glitch-2 3s infinite linear alternate-reverse;
+      left: -2px;
+      text-shadow: 2px 0 #00ffff;
+    }
+
+    @keyframes glitch-1 {
+      0%,100% { clip: rect(0, 9999px, 0, 0); }
+      20% { clip: rect(20px, 9999px, 40px, 0); }
+      40% { clip: rect(80px, 9999px, 100px, 0); }
+      60% { clip: rect(40px, 9999px, 60px, 0); }
+    }
+
+    @keyframes glitch-2 {
+      0%,100% { clip: rect(0, 9999px, 0, 0); }
+      30% { clip: rect(50px, 9999px, 70px, 0); }
+      70% { clip: rect(10px, 9999px, 30px, 0); }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 20px var(--neon-cyan); }
+      to { text-shadow: 0 0 40px var(--neon-pink), 0 0 60px var(--neon-purple); }
+    }
+
+    .typewriter {
+      font-size: 1.4rem;
+      margin: 2rem 0;
+      overflow: hidden;
+      border-right: 3px solid var(--neon-cyan);
+      white-space: nowrap;
+      animation: typing 4s steps(50) infinite, blink 0.7s infinite;
+    }
+
+    @keyframes typing {
+      0% { width: 0; }
+      50% { width: 100%; }
+      100% { width: 0; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .links {
+      margin-top: 3rem;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      color: var(--neon-cyan);
+      text-decoration: none;
+      font-size: 1.3rem;
+      padding: 0.8rem 1.8rem;
+      border: 2px solid var(--neon-purple);
+      border-radius: 4px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .links a::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: 0.6s;
+    }
+
+    .links a:hover {
+      background: rgba(157, 0, 255, 0.2);
+      color: white;
+      box-shadow: 0 0 20px var(--neon-purple);
+      transform: translateY(-3px);
+    }
+
+    .links a:hover::before {
+      left: 100%;
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .cursor {
+      color: var(--neon-pink);
+      animation: blink 1s infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="glitch-bg"></div>
+
+  <div class="container">
+    <div class="terminal">
+      <h1><span class="glitch" data-text="root@cyb3r">root@cyb3r</span></h1>
+      <p class="typewriter">> Initializing neural interface... Access granted.</p>
+      
+      <p style="margin: 2rem 0; font-size: 1.2rem; opacity: 0.9;">
+        Welcome to my digital lair.<br>
+        Hacking reality, one commit at a time.
+      </p>
+
+      <div class="links">
+        <a href="https://github.com/YOUR_USERNAME" target="_blank">GitHub</a>
+        <a href="https://twitter.com/YOUR_HANDLE" target="_blank">Twitter / X</a>
+        <a href="mailto:you@example.com">Contact</a>
+        <a href="https://yourblog.com">Blog</a>
+      </div>
+
+      <footer>
+        <p>> System online since <span id="year">2025</span> // <span class="cursor">_</span></p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
